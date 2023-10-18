@@ -1,0 +1,10 @@
+C:\Users\Asus\source\repos\BODMAS\bin\Debug\BODMAS.exe.config
+C:\Users\Asus\source\repos\BODMAS\bin\Debug\BODMAS.exe
+C:\Users\Asus\source\repos\BODMAS\bin\Debug\BODMAS.pdb
+C:\Users\Asus\source\repos\BODMAS\obj\Debug\BODMAS.csproj.AssemblyReference.cache
+C:\Users\Asus\source\repos\BODMAS\obj\Debug\BODMAS.csproj.CoreCompileInputs.cache
+C:\Users\Asus\source\repos\BODMAS\obj\Debug\BODMAS.exe
+C:\Users\Asus\source\repos\BODMAS\obj\Debug\BODMAS.pdb
+C:\VISPL\Bin\BODMAS.exe.config
+C:\VISPL\Bin\BODMAS.exe
+C:\VISPL\Bin\BODMAS.pdb
