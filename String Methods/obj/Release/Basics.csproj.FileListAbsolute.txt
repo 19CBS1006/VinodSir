@@ -1,0 +1,7 @@
+C:\Users\Asus\source\repos\Basics\bin\Release\Basics.exe.config
+C:\Users\Asus\source\repos\Basics\bin\Release\Basics.exe
+C:\Users\Asus\source\repos\Basics\obj\Release\Basics.csproj.AssemblyReference.cache
+C:\Users\Asus\source\repos\Basics\obj\Release\Basics.csproj.CoreCompileInputs.cache
+C:\Users\Asus\source\repos\Basics\obj\Release\Basics.exe
+C:\Users\Asus\source\repos\Basics\bin\Release\Basics.pdb
+C:\Users\Asus\source\repos\Basics\obj\Release\Basics.pdb
