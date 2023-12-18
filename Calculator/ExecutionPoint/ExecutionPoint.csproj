@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <BaseOutputPath>C:\VISPL\bin</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Arithematic\Arithematic.csproj" />
+    <ProjectReference Include="..\ClassLibrary1\CalculatorComponent.csproj" />
+    <ProjectReference Include="..\Power\Power.csproj" />
+  </ItemGroup>
+
+</Project>

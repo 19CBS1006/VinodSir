@@ -1,0 +1,16 @@
+C:\VISPL\bin\Debug\net6.0\ExecutionPoint.exe
+C:\VISPL\bin\Debug\net6.0\ExecutionPoint.deps.json
+C:\VISPL\bin\Debug\net6.0\ExecutionPoint.runtimeconfig.json
+C:\VISPL\bin\Debug\net6.0\ExecutionPoint.dll
+C:\VISPL\bin\Debug\net6.0\ExecutionPoint.pdb
+C:\Users\Asus\Downloads\Calculator\ExecutionPoint\obj\Debug\net6.0\ExecutionPoint.csproj.AssemblyReference.cache
+C:\Users\Asus\Downloads\Calculator\ExecutionPoint\obj\Debug\net6.0\ExecutionPoint.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Downloads\Calculator\ExecutionPoint\obj\Debug\net6.0\ExecutionPoint.AssemblyInfoInputs.cache
+C:\Users\Asus\Downloads\Calculator\ExecutionPoint\obj\Debug\net6.0\ExecutionPoint.AssemblyInfo.cs
+C:\Users\Asus\Downloads\Calculator\ExecutionPoint\obj\Debug\net6.0\ExecutionPoint.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Downloads\Calculator\ExecutionPoint\obj\Debug\net6.0\ExecutionPoint.csproj.CopyComplete
+C:\Users\Asus\Downloads\Calculator\ExecutionPoint\obj\Debug\net6.0\ExecutionPoint.dll
+C:\Users\Asus\Downloads\Calculator\ExecutionPoint\obj\Debug\net6.0\refint\ExecutionPoint.dll
+C:\Users\Asus\Downloads\Calculator\ExecutionPoint\obj\Debug\net6.0\ExecutionPoint.pdb
+C:\Users\Asus\Downloads\Calculator\ExecutionPoint\obj\Debug\net6.0\ExecutionPoint.genruntimeconfig.cache
+C:\Users\Asus\Downloads\Calculator\ExecutionPoint\obj\Debug\net6.0\ref\ExecutionPoint.dll

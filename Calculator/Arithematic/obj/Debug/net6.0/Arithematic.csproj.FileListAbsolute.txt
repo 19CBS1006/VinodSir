@@ -1,0 +1,11 @@
+C:\VISPL\bin\Debug\net6.0\Arithematic.deps.json
+C:\VISPL\bin\Debug\net6.0\Arithematic.dll
+C:\VISPL\bin\Debug\net6.0\Arithematic.pdb
+C:\Users\Asus\Downloads\Calculator\Arithematic\obj\Debug\net6.0\Arithematic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Downloads\Calculator\Arithematic\obj\Debug\net6.0\Arithematic.AssemblyInfoInputs.cache
+C:\Users\Asus\Downloads\Calculator\Arithematic\obj\Debug\net6.0\Arithematic.AssemblyInfo.cs
+C:\Users\Asus\Downloads\Calculator\Arithematic\obj\Debug\net6.0\Arithematic.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Downloads\Calculator\Arithematic\obj\Debug\net6.0\Arithematic.dll
+C:\Users\Asus\Downloads\Calculator\Arithematic\obj\Debug\net6.0\refint\Arithematic.dll
+C:\Users\Asus\Downloads\Calculator\Arithematic\obj\Debug\net6.0\Arithematic.pdb
+C:\Users\Asus\Downloads\Calculator\Arithematic\obj\Debug\net6.0\ref\Arithematic.dll
