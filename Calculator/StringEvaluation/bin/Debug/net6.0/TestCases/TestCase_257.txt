@@ -1,8 +1,0 @@
-Test Case 257:
-Sentence: hyhllz esdqyohvawjfjyjhvyvea bmpavgjnqx kvwmjtvz
-Words: y,  bm, y, m
-Found 'y' at index 1
-Found ' bm' at index 28
-Found 'y' at index 1
-Found 'm' at index 30
-

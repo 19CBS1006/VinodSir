@@ -1,6 +1,0 @@
-Test Case 112:
-Sentence: yblmzejtj izpvkkjqa ruzqgji 
-Words:  i, b
-Found ' i' at index 9
-Found 'b' at index 1
-

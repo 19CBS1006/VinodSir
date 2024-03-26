@@ -1,0 +1,233 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-color: #202020;
+    color: white;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+[id="main"]{
+    display: flex;
+    flex-direction:row;
+    width: 100vw;
+    height:100vh;
+    padding: 5px 5px;
+}
+[id="left"]{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    width: 70%;
+    height: 100%;
+}
+[id="right"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+}
+[id="current"] {
+    display: block;
+    width: 100%;
+    height: 60px;
+}
+.std {
+    display:none;
+}
+[id="currentTextArea"] {
+    width: contain;
+    height: 60px;
+    text-align: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+[id="tillnow"] {
+    display: block;
+    width: 100%;
+    height: 40px;
+}
+[id="tillnowtextArea"] {
+    width: contain;
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    color: darkgray;
+}
+
+.std button {
+    margin: 0;
+    width: 24%;
+    height: 50px;
+    background-color: #2c2d2d;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin: 5px 5px;
+}
+    .std button:hover {
+        animation: genbtnhover;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+.sci button {
+    margin: 0;
+    width: 19%;
+    height: 50px;
+    background-color: #2c2d2d;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin: 5px 5px;
+}
+    .sci button:hover {
+        animation: genbtnhover;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+
+[id="status"] button {
+    margin: 0%;
+    width: 10%;
+    height: 50px;
+    background-color: #2c2d2d;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin: 5px 5px;
+}
+    [id="status"] button:hover {
+        animation: genbtnhover;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+[id="memoryopr"] button {
+    margin: 0%;
+    width: 10%;
+    height: 50px;
+    background-color: #2c2d2d;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin: 5px 5px;
+}
+    [id="memoryopr"] button:hover {
+        animation:genbtnhover;
+        animation-duration:0.5s;
+        animation-fill-mode:forwards;
+    }
+.std .num {
+    background-color: #313131;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin: 5px 5px;
+}
+    .std .num:hover {
+        animation: numbtnhover;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+.sci .num {
+    background-color: #313131;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin: 5px 5px;
+}
+    .sci .num:hover {
+        animation: numbtnhover;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+#stdequal {
+    background-color: #4cc1fd;
+    border-radius: 5px;
+    border: none;
+    margin: 5px 5px;
+}
+#sciequal {
+    background-color: #4cc1fd;
+    border-radius: 5px;
+    border: none;
+    margin: 5px 5px;
+}
+
+[id="right"] [id="rightbtns"] button {
+    margin: 0;
+    width: auto;
+    height: 30px;
+    background-color: #202020;
+    color: white;
+    border: none;
+}
+    [id="right"] [id="rightbtns"] button:hover {
+        animation: rightbtn;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+
+@keyframes numbtnhover {
+    from {
+        background-color: #313131;
+    }
+
+    to {
+        background-color: #3c3c3c;
+    }
+}
+
+@keyframes genbtnhover {
+    from {
+        background-color: #2c2d2d;
+    }
+
+    to {
+        background-color: #3c3c3c;
+    }
+}
+
+@keyframes rightbtn {
+    from {
+        color: white;
+    }
+
+    to {
+        color: #9f9f9f;
+    }
+}
+
+[id="memory"] {
+    display:none;
+}

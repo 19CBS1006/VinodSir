@@ -1,6 +1,0 @@
-Test Case 394:
-Sentence: kpncbcncpaxyhc rkalcpzd hoyfqfjbrvxmfplvnsswdlqnfccsjekbvnwftxxjilixydzjpxuar
-Words: fccsj, fccs
-Found 'fccsj' at index 48
-Found 'fccs' at index 48
-

@@ -1,8 +1,0 @@
-Test Case 457:
-Sentence: i taslbzqk fgxsnzk aziukpsiezvgzt 
-Words: slbzqk , psie, ps, s
-Found 'slbzqk ' at index 4
-Found 'psie' at index 24
-Found 'ps' at index 24
-Found 's' at index 4
-
