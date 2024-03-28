@@ -1,0 +1,141 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Asus\\Downloads\\Calculator\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|c:\\users\\asus\\downloads\\calculator\\sci_calculator_web_form\\webform1.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|solutionrelative:sci_calculator_web_form\\webform1.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|C:\\Users\\Asus\\Downloads\\Calculator\\sci_calculator_web_form\\styles\\stylesheet1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|solutionrelative:sci_calculator_web_form\\styles\\stylesheet1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|C:\\Users\\Asus\\Downloads\\Calculator\\sci_calculator_web_form\\myjs\\javascript.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|solutionrelative:sci_calculator_web_form\\myjs\\javascript.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|C:\\Users\\Asus\\Downloads\\Calculator\\sci_calculator_web_form\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|solutionrelative:sci_calculator_web_form\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|C:\\Users\\Asus\\Downloads\\Calculator\\sci_calculator_web_form\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|solutionrelative:sci_calculator_web_form\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|C:\\Users\\Asus\\Downloads\\Calculator\\sci_calculator_web_form\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|solutionrelative:sci_calculator_web_form\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|C:\\Users\\Asus\\Downloads\\Calculator\\sci_calculator_web_form\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2328A58-E696-4632-A2E7-06E8BCD2CC3A}|Sci_Calculator_web_Form\\Sci_Calculator_web_Form.csproj|solutionrelative:sci_calculator_web_form\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 213,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JavaScript.js",
+              "DocumentMoniker": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\MyJS\\JavaScript.js",
+              "RelativeDocumentMoniker": "Sci_Calculator_web_Form\\MyJS\\JavaScript.js",
+              "ToolTip": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\MyJS\\JavaScript.js",
+              "RelativeToolTip": "Sci_Calculator_web_Form\\MyJS\\JavaScript.js",
+              "ViewState": "AQIAABkFAAAAAAAAAAAhwC0FAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-03-27T04:29:18.086Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WebForm1.aspx",
+              "DocumentMoniker": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\WebForm1.aspx",
+              "RelativeDocumentMoniker": "Sci_Calculator_web_Form\\WebForm1.aspx",
+              "ToolTip": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\WebForm1.aspx",
+              "RelativeToolTip": "Sci_Calculator_web_Form\\WebForm1.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-03-27T04:29:17.053Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "StyleSheet1.css",
+              "DocumentMoniker": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\Styles\\StyleSheet1.css",
+              "RelativeDocumentMoniker": "Sci_Calculator_web_Form\\Styles\\StyleSheet1.css",
+              "ToolTip": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\Styles\\StyleSheet1.css",
+              "RelativeToolTip": "Sci_Calculator_web_Form\\Styles\\StyleSheet1.css",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADEAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-03-27T04:29:18.242Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Global.asax.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\Global.asax.cs",
+              "RelativeDocumentMoniker": "Sci_Calculator_web_Form\\Global.asax.cs",
+              "ToolTip": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\Global.asax.cs",
+              "RelativeToolTip": "Sci_Calculator_web_Form\\Global.asax.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-27T04:29:18.252Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BundleConfig.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\App_Start\\BundleConfig.cs",
+              "RelativeDocumentMoniker": "Sci_Calculator_web_Form\\App_Start\\BundleConfig.cs",
+              "ToolTip": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\App_Start\\BundleConfig.cs",
+              "RelativeToolTip": "Sci_Calculator_web_Form\\App_Start\\BundleConfig.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-27T04:29:18.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RouteConfig.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\App_Start\\RouteConfig.cs",
+              "RelativeDocumentMoniker": "Sci_Calculator_web_Form\\App_Start\\RouteConfig.cs",
+              "ToolTip": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\App_Start\\RouteConfig.cs",
+              "RelativeToolTip": "Sci_Calculator_web_Form\\App_Start\\RouteConfig.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-27T04:29:18.258Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Site.Master",
+              "DocumentMoniker": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\Site.Master",
+              "RelativeDocumentMoniker": "Sci_Calculator_web_Form\\Site.Master",
+              "ToolTip": "C:\\Users\\Asus\\Downloads\\Calculator\\Sci_Calculator_web_Form\\Site.Master",
+              "RelativeToolTip": "Sci_Calculator_web_Form\\Site.Master",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-03-27T04:29:18.26Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

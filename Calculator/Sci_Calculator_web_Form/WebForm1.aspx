@@ -115,38 +115,38 @@
                     </div>
                     <div>
                         <button onclick="rt()">sqrt</button><!--
-                     --><button>(</button><!--
-                     --><button>)</button><!--
+                     --><button id="open">(</button><!--
+                     --><button id="close">)</button><!--
                      --><button onclick="fact()">n!</button><!--
-                     --><button>÷</button>
+                     --><button id="divide">÷</button>
                     </div>
                     <div>
                         <button onclick="randpow()">x<sup>y</sup></button><!--
-                     --><button class="num">7</button><!--
-                     --><button class="num">8</button><!--
-                     --><button class="num">9</button><!--
-                     --><button>x</button>
+                     --><button id="7" class="num">7</button><!--
+                     --><button id="8" class="num">8</button><!--
+                     --><button id="9" class="num">9</button><!--
+                     --><button id ="multiply">x</button>
                     </div>
                     <div>
                         <button onclick="tenpow()">10<sup>x</sup></button><!--
-                     --><button class="num">4</button><!--
-                     --><button class="num">5</button><!--
-                     --><button class="num">6</button><!--
-                     --><button>-</button>
+                     --><button id="4" class="num">4</button><!--
+                     --><button id="5" class="num">5</button><!--
+                     --><button id="6" class="num">6</button><!--
+                     --><button id="subtract">-</button>
                     </div>
                     <div>
                         <button onclick="log()">log</button><!--
-                     --><button class="num">1</button><!--
-                     --><button class="num">2</button><!--
-                     --><button class="num">3</button><!--
-                     --><button>+</button>
+                     --><button id="1" class="num">1</button><!--
+                     --><button id="2" class="num">2</button><!--
+                     --><button id="3" class="num">3</button><!--
+                     --><button id="add">+</button>
                     </div>
                     <div>
                         <button onclick="ln()">ln</button><!--
                      --><button onclick="negate()"><sup>+</sup>/<sub>-</sub></button><!--
-                     --><button class="num">0</button><!--
-                     --><button >.</button><!--
-                     --><button id="sciequal" onclick="">=</button>
+                     --><button id="0" class="num">0</button><!--
+                     --><button onclick="dot()">.</button><!--
+                     --><button id="sciequal" onclick="equal()">=</button>
                     </div>
                 </div>
             </div>

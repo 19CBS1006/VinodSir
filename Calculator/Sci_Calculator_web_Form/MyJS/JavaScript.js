@@ -1,7 +1,7 @@
 ﻿var historyStack = [];
 var memoryStack = [];
 var result = [];
-var backendResult = [];
+var anyBracket = false;
 var backendIndex = 0;
 var state = 0;
 var resultIndex = 0;
@@ -24,6 +24,9 @@ var inputWaitMethodSolveable = [];
 var inputWaitMethodFirstVal = [];
 var IsinputWaitMethodStarting = [];
 var IsModeC = false;
+var ValueIsChanged = false;
+var previousValue;
+var IsclosedBracket = false;
 document.addEventListener('DOMContentLoaded', function () {
     var unit = unitElements.value;
     unitElements.addEventListener('change', function () {
@@ -48,6 +51,26 @@ document.addEventListener('DOMContentLoaded', function () {
         var currentmemory = document.getElementById("memoryPlaceBefore");
         currentmemory.innerText = " ";
     }
+    numberKeys();
+    document.getElementById("add").addEventListener("click", function () {
+        oprs('+');
+    });
+    document.getElementById("subtract").addEventListener("click", function () {
+        oprs('-');
+    });
+    document.getElementById("multiply").addEventListener("click", function () {
+        oprs('*');
+    });
+    document.getElementById("divide").addEventListener("click", function () {
+        oprs('/');
+    });
+    document.getElementById("open").addEventListener("click", function () {
+        oprs('(');
+    });
+    document.getElementById("close").addEventListener("click", function () {
+        oprs(')');
+    });
+
 });
 document.addEventListener("keydown",
     (event) => {
@@ -68,10 +91,12 @@ document.addEventListener("keydown",
                 if (inputWaitMethodType[inputWaitMethodType.length - 1] == '0') {
                     if (tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == ')') {
                         tillNowElement.innerText = tillNowElement.innerText + `${event.key}`;
+                        previousValue = currentValue;
                         currentValue = Math.pow(parseFloat(inputWaitMethodFirstVal[inputWaitMethodFirstVal.length - 1]), parseFloat(result[result.length - 1]));
                     }
                     else {
                         tillNowElement.innerText = tillNowElement.innerText + currentValue + `${event.key}`;
+                        previousValue = currentValue;
                         currentValue = Math.pow(parseFloat(inputWaitMethodFirstVal[inputWaitMethodFirstVal.length - 1]), parseFloat(currentValue));
                     }
                     inputWaitMethodFirstVal.pop();
@@ -84,6 +109,19 @@ document.addEventListener("keydown",
                     resultIndex = result.length;
                     state = "0";
                     decimalIsSet = false;
+                    ValueIsChanged = true;
+                    IsSolvable = true;
+                    if ((result.length - parseFloat(noOfOpenBrackets)) > 2 && IsSolvable && result[2] !== undefined && result[result.length - 3] != '(') {
+                        console.log(result[resultIndex - 1] + " okey" + result.length);
+                        /*for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " " + i);
+                        }*/
+                        finalResult = solveOpr(result, resultIndex - 2);
+                        element.innerText = finalResult.computedValue;
+                        /*for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " 2nd " + i);
+                        }*/
+                    }
                     /*console.log("jujubi" + result.length);
                     for (var i = 0; i < result.length; i++) {
                         console.log(result[i] + " " + i);
@@ -92,10 +130,12 @@ document.addEventListener("keydown",
                 else if (inputWaitMethodType[inputWaitMethodType.length - 1] == '1') {
                     if (tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == ')') {
                         tillNowElement.innerText = tillNowElement.innerText + `${event.key}`;
+                        previousValue = currentValue;
                         currentValue = Math.pow(parseFloat(inputWaitMethodFirstVal[inputWaitMethodFirstVal.length - 1]), parseFloat(1 / parseFloat(result[result.length - 1])));
                     }
                     else {
                         tillNowElement.innerText = tillNowElement.innerText + currentValue + `${event.key}`;
+                        previousValue = currentValue;
                         currentValue = Math.pow(parseFloat(inputWaitMethodFirstVal[inputWaitMethodFirstVal.length - 1]), parseFloat(1 / parseFloat(currentValue)));
                     }
                     inputWaitMethodFirstVal.pop();
@@ -108,14 +148,30 @@ document.addEventListener("keydown",
                     resultIndex = result.length;
                     state = "0";
                     decimalIsSet = false;
+                    ValueIsChanged = true;
+                    IsSolvable = true;
+                    if ((result.length - parseFloat(noOfOpenBrackets)) > 2 && IsSolvable && result[2] !== undefined && result[result.length - 3] != '(') {
+                        /*console.log(result[resultIndex - 1] + " okey" + result.length);
+                        for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " " + i);
+                        }*/
+                        finalResult = solveOpr(result, resultIndex - 2);
+                        element.innerText = finalResult.computedValue;
+                        /*for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " 2nd " + i);
+                        }*/
+                    }
                 }
+
                 else if (inputWaitMethodType[inputWaitMethodType.length - 1] == '2') {
                     if (tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == ')') {
                         tillNowElement.innerText = tillNowElement.innerText + `${event.key}`;
+                        previousValue = currentValue;
                         currentValue = Math.log(parseFloat(inputWaitMethodFirstVal[inputWaitMethodFirstVal.length - 1])) / Math.log(parseFloat(result[result.length - 1]));
                     }
                     else {
                         tillNowElement.innerText = tillNowElement.innerText + currentValue + `${event.key}`;
+                        previousValue = currentValue;
                         currentValue = Math.log(parseFloat(inputWaitMethodFirstVal[inputWaitMethodFirstVal.length - 1]))/ Math.log(parseFloat(currentValue));
                     }
                     inputWaitMethodFirstVal.pop();
@@ -128,14 +184,29 @@ document.addEventListener("keydown",
                     resultIndex = result.length;
                     state = "0";
                     decimalIsSet = false;
+                    ValueIsChanged = true;
+                    IsSolvable = true;
+                    if ((result.length - parseFloat(noOfOpenBrackets)) > 2 && IsSolvable && result[2] !== undefined && result[result.length - 3] != '(') {
+                        console.log(result[resultIndex - 1] + " okey" + result.length);
+                        /*for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " " + i);
+                        }*/
+                        finalResult = solveOpr(result, resultIndex - 2);
+                        element.innerText = finalResult.computedValue;
+                        /*for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " 2nd " + i);
+                        }*/
+                    }
                 }
                 else if (inputWaitMethodType[inputWaitMethodType.length - 1] == '3') {
                     if (tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == ')') {
                         tillNowElement.innerText = tillNowElement.innerText + `${event.key}`;
+                        previousValue = currentValue;
                         currentValue = parseFloat(inputWaitMethodFirstVal[inputWaitMethodFirstVal.length - 1]) % parseFloat(result[result.length - 1]);
                     }
                     else {
                         tillNowElement.innerText = tillNowElement.innerText + currentValue + `${event.key}`;
+                        previousValue = currentValue;
                         currentValue = parseFloat(inputWaitMethodFirstVal[inputWaitMethodFirstVal.length - 1]) % parseFloat(currentValue);
                     }
                     inputWaitMethodFirstVal.pop();
@@ -148,6 +219,19 @@ document.addEventListener("keydown",
                     resultIndex = result.length;
                     state = "0";
                     decimalIsSet = false;
+                    ValueIsChanged = true;
+                    IsSolvable = true;
+                    if ((result.length - parseFloat(noOfOpenBrackets)) > 2 && IsSolvable && result[2] !== undefined && result[result.length - 3] != '(') {
+                        console.log(result[resultIndex - 1] + " okey" + result.length);
+                        for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " " + i);
+                        }
+                        finalResult = solveOpr(result, resultIndex - 2);
+                        element.innerText = finalResult.computedValue;
+                        for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " 2nd " + i);
+                        }
+                    }
                 }
             }
             else {
@@ -169,16 +253,17 @@ document.addEventListener("keydown",
                     state = "0";
                     decimalIsSet = false;
                     newresult = false;
+                    ValueIsChanged = false;
 
                 }
                 else {
                     if (tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == ')' && !functionval) {
                         console.log(resultIndex);
                         result.push(`${event.key}`);
-                        resultIndex = resultIndex + 1;
-                        for (var i = 0; i < result.length; i++) {
+                        resultIndex = result.length;
+                        /*for (var i = 0; i < result.length; i++) {
                             console.log(result[i]);
-                        }
+                        }*/
                         tillNowElement.innerText = tillNowElement.innerText + `${event.key}`;
                         IsSolvable = false;
                     }
@@ -191,51 +276,87 @@ document.addEventListener("keydown",
                     }
                     if (tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == '+') {
                         IsSolvable = true;
+                        for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " ok1 " + i);
+                        }
+                        console.log(ValueIsChanged + " " + result.length);
+                        resultIndex = result.length;
+                        /*for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " + "+ i);
+                        }*/
                         if (result.length > 1) {
-                            resultIndex = result.length;
-                            if (result[resultIndex - 1] == '*') {
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) * parseFloat(parseFloat(currentValue));
-                                result[resultIndex - 1] = `${event.key}`;
+                            if(result[resultIndex - 1] == '*') {
+                                if (ValueIsChanged) {
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) * parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                }
                             }
                             else if (result[resultIndex - 1] == '/') {
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) / parseFloat(currentValue);
-                                result[resultIndex - 1] = `${event.key}`;
+                                if (ValueIsChanged) {
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) / parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                }
                             }
                             else if (result[resultIndex - 1] == '-') {
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) - parseFloat(currentValue);
-                                result[resultIndex - 1] = `${event.key}`;
+                                if (ValueIsChanged) {
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) - parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                }
                             }
                             else if (result[resultIndex - 1] == '+') {
-                                console.log("okokokokokokokok" + result[resultIndex - 2] + " " + resultIndex);
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) + parseFloat(currentValue);
-                                result[resultIndex - 1] = `${event.key}`;
+                                if (ValueIsChanged) {
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) + parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                }
                             }
                         }
-                        console.log(currentValue + " " + result[resultIndex - 2]);
                         element.innerText = result[resultIndex - 2];
+                        console.log(currentValue + " " + result[resultIndex - 2]);
+                        resultIndex = result.length;                        
+                        for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " ok " + i);
+                        }
                         //element.innerText = parseFloat(result[resultIndex]) + parseFloat(parseFloat(currentValue));
                     }
                     else if (tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == '-') {
                         IsSolvable = true;
+                        for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " ok1 " + i);
+                        }
+                        console.log(ValueIsChanged + " " + result.length);
+                        resultIndex = result.length;
                         if (result.length > 1) {
                             if (result[resultIndex - 1] == '*') {
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) * parseFloat(currentValue);
-                                result[resultIndex - 1] = `${event.key}`;
+                                if (ValueIsChanged) {
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) * parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                }                                
                             }
                             else if (result[resultIndex - 1] == '/') {
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) / parseFloat(currentValue);
-                                result[resultIndex - 1] = `${event.key}`;
+                                if (ValueIsChanged) {
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) / parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                }
                             }
                             else if (result[resultIndex - 1] == '-') {
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) - parseFloat(currentValue);
-                                result[resultIndex - 1] = `${event.key}`;
+                                if (ValueIsChanged) {
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) - parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                }
                             }
                             else if (result[resultIndex - 1] == '+') {
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) + parseFloat(currentValue);
-                                result[resultIndex - 1] = `${event.key}`;
+                                if (ValueIsChanged) {
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) + parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                }
                             }
                         }
                         element.innerText = result[resultIndex - 2];
+                        console.log(currentValue + " " + result[resultIndex - 2]);
+                        resultIndex = result.length;
+                        for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " ok " + i);
+                        }
                         //element.innerText = parseFloat(result[resultIndex]) - parseFloat(parseFloat(currentValue));
                     }
                     else if (tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == '*') {
@@ -247,20 +368,28 @@ document.addEventListener("keydown",
                                 console.log(result[i] + " okok "+ i);
                             }*/
                             if (result[resultIndex - 1] == '*') {
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) * parseFloat(currentValue);
-                                result[resultIndex - 1] = `${event.key}`;
-                                element.innerText = result[resultIndex - 2];
+                                if (ValueIsChanged) {
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) * parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                    element.innerText = result[resultIndex - 2];
+                                }
                             }
                             else if (result[resultIndex - 1] == '/') {
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) / parseFloat(currentValue);
-                                result[resultIndex - 1] = `${event.key}`;
-                                element.innerText = result[resultIndex - 2];
+                                if (ValueIsChanged) {
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) / parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                    element.innerText = result[resultIndex - 2];
+                                }
+                                
                             }
                             else if (result[resultIndex - 1] == '+' || result[resultIndex - 1] == '-') {
+                                if (ValueIsChanged) {
+                                }
                                 result.push(currentValue);
                                 result.push(`${event.key}`);
                                 resultIndex = result.length;
                                 element.innerText = currentValue;
+                                
                             }
                             /*console.log("mul after");
                             for (var i = 0; i < result.length; i++) {
@@ -278,30 +407,46 @@ document.addEventListener("keydown",
                             }*/
                             resultIndex = result.length;
                             if (result[resultIndex - 1] == '*') {
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) * parseFloat(currentValue);
-                                result[resultIndex - 1] = `${event.key}`;
-                                element.innerText = result[resultIndex - 2];
+                                console.log("boom boom " + ValueIsChanged);
+                                if (ValueIsChanged) {
+                                    console.log("boom boom");
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) * parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                    element.innerText = result[resultIndex - 2];
+                                }
                             }
                             else if (result[resultIndex - 1] == '/') {
-                                result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) / parseFloat(currentValue);
-                                result[resultIndex - 1] = `${event.key}`;
-                                element.innerText = result[resultIndex - 2];
+                                if (ValueIsChanged) {
+                                    result[resultIndex - 2] = parseFloat(result[resultIndex - 2]) / parseFloat(currentValue);
+                                    result[resultIndex - 1] = `${event.key}`;
+                                    element.innerText = result[resultIndex - 2];
+                                }
+                                
                             }
                             else if (result[resultIndex - 1] == '+' || result[resultIndex - 1] == '-') {
-                                result.push(currentValue);
-                                result.push(`${event.key}`);
-                                resultIndex = result.length;
-                                /*for (var i = 0; i < result.length; i++) {
-                                    console.log(result[i]);
-                                }*/
-                                element.innerText = currentValue;
+                                if (ValueIsChanged) {
+                                    result.push(currentValue);
+                                    result.push(`${event.key}`);
+                                    resultIndex = result.length;
+                                    /*for (var i = 0; i < result.length; i++) {
+                                        console.log(result[i]);
+                                    }*/
+                                }
+                                    element.innerText = currentValue;
+                                
                             }
                         }
                     }
-                    if ((result.length - parseFloat(noOfOpenBrackets)) > 2 && IsSolvable && result[2] !== undefined) {
-                        console.log(result[resultIndex]);
+                    if ((result.length - parseFloat(noOfOpenBrackets)) > 2 && IsSolvable && result[2] !== undefined && result[result.length - 3] != '(') {
+                        console.log(result[resultIndex - 1] + " okey" + result.length);
+                        /*for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " " + i);
+                        }*/
                         finalResult = solveOpr(result, resultIndex - 2);
                         element.innerText = finalResult.computedValue;
+                        for (var i = 0; i < result.length; i++) {
+                            console.log(result[i] + " 2nd " + i);
+                        }
                     }
                     state = "0";
                     decimalIsSet = false;
@@ -317,6 +462,7 @@ document.addEventListener("keydown",
                 element.innerText = currentValue + `${event.key}`;
                 state = element.innerText;
             }
+            ValueIsChanged = true;
         }
         else if (event.key == '.') {
             if (!decimalIsSet) {
@@ -337,6 +483,7 @@ document.addEventListener("keydown",
                 inputWaitMethodSolveable[inputWaitMethodSolveable.length - 1] = inputWaitMethodSolveable[inputWaitMethodSolveable.length - 1] + 1;
             }
             newresult = true;
+            anyBracket = true;
             if (tillNowElement.innerText.length > 0) {
                 if (tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == '+' ||
                     tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == '-' ||
@@ -345,14 +492,15 @@ document.addEventListener("keydown",
                     tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == '(') {
                     tillNowElement.innerText = tillNowElement.innerText + `${event.key}`;
                     noOfOpenBrackets = noOfOpenBrackets + 1;
+                    element.innerText = "0";
                     result.push(`${event.key}`);
-                    resultIndex = resultIndex + 1;
+                    resultIndex = result.length;
                 }
                 else if (tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == '^') {
                     tillNowElement.innerText = tillNowElement.innerText + `${event.key}`;
                     noOfOpenBrackets = noOfOpenBrackets + 1;
                     result.push(`${event.key}`);
-                    resultIndex = resultIndex + 1;
+                    resultIndex = result.length;
                     element.innerText = "0";
                     state = "0";
                 }
@@ -363,7 +511,7 @@ document.addEventListener("keydown",
                     tillNowElement.innerText = tillNowElement.innerText + 'x' + `${event.key}`;
                     noOfOpenBrackets = noOfOpenBrackets + 1;
                     result.push(`${event.key}`);
-                    resultIndex = resultIndex + 1;
+                    resultIndex = result.length;
                 }
             }
             else {
@@ -382,7 +530,7 @@ document.addEventListener("keydown",
                     tillNowElement.innerText = tillNowElement.innerText + `${event.key}`;
                     result.push(`${event.key}`);
                     noOfOpenBrackets = noOfOpenBrackets + 1;
-                    resultIndex = resultIndex + 1;
+                    resultIndex = result.length;
                 }
                 
             }
@@ -400,13 +548,14 @@ document.addEventListener("keydown",
                     tillNowElement.innerText = tillNowElement.innerText + currentValue + `${event.key}`;
                 }
                 result.push(currentValue);  
-                resultIndex = resultIndex + 1;
+                resultIndex = result.length;
                 noOfOpenBrackets = noOfOpenBrackets - 1;
                 if ((result.length - parseFloat(noOfOpenBrackets)) > 2) {
                     for (var i = 0; i < result.length; i++) {
                         for (var i = 0; i < result.length; i++) {
                             console.log(result[i] + " " + i);
                         }
+                        IsclosedBracket = true;
                         finalResult = solveOpr(result, result.length - 1);
                         console.log("after " + finalResult.computedValue + " " + finalResult.index);
                         for (var i = 0; i < result.length; i++) {
@@ -419,6 +568,8 @@ document.addEventListener("keydown",
                         resultIndex = finalResult.index;
                         console.log("added index " + resultIndex);
                         result[resultIndex] = finalResult.computedValue;
+                        ValueIsChanged = false;
+                        IsclosedBracket = false;
                     }
                 }
             }
@@ -442,6 +593,9 @@ function solveOpr(result, index) {
     var resultIndex;
     for (var i = index; i >= 2; i = i - 2) {
         console.log("start " + i + " " + result[i]);
+        for (var j = 0; j < result.length; j++) {
+            console.log(result[j] + " " + j);
+        }
         var oprnd1 = result[i];
         var opr = result[i - 1];
         var oprnd2 = result[i - 2];
@@ -458,23 +612,42 @@ function solveOpr(result, index) {
             result[i - 2] = parseFloat(oprnd2) / parseFloat(oprnd1)
         }
         else if (opr == '(') {
-            result.splice(i - 1, 1);
-            return {
-                computedValue: result[i-1],
-                index: i - 1
+            for (var j = 0; j < result.length; j++) {
+                console.log(result[j] + " " + j);
+            }
+            if (IsclosedBracket) {
+                result.splice(i - 1, 1);
+                return {
+                    computedValue: result[i - 1],
+                    index: i - 1
+                }
+            }
+            else {
+                return {
+                    computedValue: result[i],
+                    index: i
+                }
             }
         }
         Result = result[i - 2];
         resultIndex = i - 2;
-        result.pop();
-        result.pop();
+        result.splice(i - 1, 2);
     }
+    /*for (var a = 0; a < result.length; a++) {
+        result.pop(); //12((1+1)*1+1)+20+ =>undefined
+    }*/
     if (result[0] == '(') {
         result.splice(0, 1);
+        for (var j = 0; j < result.length; j++) {
+            console.log(result[j] + " " + j);
+        }
         return {
             computedValue: Result,
             index: 0
         }
+    }
+    for (var j = 0; j < result.length; j++) {
+        console.log(result[j] + " " + j);
     }
     return {
         computedValue: Result,
@@ -485,13 +658,24 @@ function solveOpr(result, index) {
 let intervalId;
 function monitorOutput() {
     let output = document.getElementById("currentTextArea");
-    if (output.innerText == "NaN" || output.innerText == "Infinity") {
+    if (output.innerText == "NaN" || output.innerText == "Infinity" || output.innerText == "16331239353195370") {
         let errorEvent = new CustomEvent('errorOutput');
+        output.innerText = "Invalid Input";
         document.dispatchEvent(errorEvent);
         clearInterval(intervalId);
     }
+    /*if (output.innerText != previousValue) {
+        let valueChangedEvent = new CustomEvent('textBoxValuechange');
+        document.dispatchEvent(valueChangedEvent);
+        clearInterval(intervalId);
+    }*/
 }
 intervalId = setInterval(monitorOutput, 100);
+
+document.addEventListener('textBoxValuechange', function (event) {
+    ValueIsChanged = true;
+    console.log("triggered");
+})
 document.addEventListener('errorOutput', function (event) {
     let allButtons = document.querySelectorAll("button");
     allButtons.forEach(function (button) {
@@ -563,9 +747,12 @@ function equal() {
         console.log(finalResult.computedValue);*/
         element.innerText = result[0];
     }
+    else if (result.length === 1) {
+        element.innerText = result[0];
+    }
     else {
         result.push(currentValue);
-        resultIndex = resultIndex + 1;
+        resultIndex = result.length;
 
         if (tillNowElement.innerText.substring(tillNowElement.innerText.length - 1, tillNowElement.innerText.length) == '+') {
             element.innerText = result[resultIndex];
@@ -603,6 +790,69 @@ function equal() {
     element.style.fontSize = "26px";
     historyStack.push(tillNowElement.innerText);
     historyPopulate(tillNowElement.innerText);
+}
+
+function oprs(keys) {
+    if (keys == '+') {
+        var event = new KeyboardEvent('keydown', {
+            key: '+',
+            keyCode: 187,
+            code: 'Equal',
+            which: 187,
+            shiftKey: true,
+        });
+        document.dispatchEvent(event);
+    }
+    else if (keys == '-') {
+        var event = new KeyboardEvent('keydown', {
+            key: '-',
+            keyCode: 189,
+            code: 'Minus',
+            which: 189,
+            shiftKey: true,
+        });
+        document.dispatchEvent(event);
+    }
+    else if (keys == '*') {
+        var event = new KeyboardEvent('keydown', {
+            key: '*',
+            keyCode: 56,
+            code: 'Digit8',
+            which: 56,
+            shiftKey: true,
+        });
+        document.dispatchEvent(event);
+    }
+    else if (keys == '/') {
+        var event = new KeyboardEvent('keydown', {
+            key: '/',
+            keyCode: 191,
+            code: 'Slash',
+            which: 191,
+            shiftKey: true,
+        });
+        document.dispatchEvent(event);
+    }
+    else if (keys == '(') {
+        var event = new KeyboardEvent('keydown', {
+            key: '(',
+            keyCode: 57,
+            code: 'Digit9',
+            which: 57,
+            shiftKey: true,
+        });
+        document.dispatchEvent(event);
+    }
+    else if (keys == ')') {
+        var event = new KeyboardEvent('keydown', {
+            key: ')',
+            keyCode: 48,
+            code: 'Digit0',
+            which: 48,
+            shiftKey: true,
+        });
+        document.dispatchEvent(event);
+    }
 }
 function historyPopulate(historyElement) {
     const newHist = document.createElement("p");
@@ -651,7 +901,10 @@ function memoryPlus() {
 }
 function memoryRecall() {
     element = document.getElementById("currentTextArea");
+    previousValue = element.innerText;
+    ValueIsChanged = true;
     element.innerText = memoryStack[memoryStack.length - 1];
+
 
 }
 function memoryClear() {
@@ -663,6 +916,33 @@ function memoryClear() {
     }
     memoryStack.pop();
 }
+
+function fact() {
+    element = document.getElementById("currentTextArea");
+    currentValue = element.innerText;
+    tillNowElement.innerText = tillNowElement.innerText + `fact(${currentValue})`;
+    previousValue = currentValue;
+    ValueIsChanged = true;
+    currentValue = Math.floor(parseFloat(currentValue));
+    var factorialResult = 1;
+    for (var i = currentValue; i > 0; i--) {
+        factorialResult = factorialResult * i;
+    }
+    element.innerText = factorialResult;
+    
+}
+function dot() {
+    if (!decimalIsSet) {
+            element.innerText = '0.'; //set the tillnow
+            state = element.innerText;
+        }
+        else {
+            element.innerText = currentValue + '.';
+            state = element.innerText;
+        }
+        decimalIsSet = true;
+    }
+
 function xsq() {
     element = document.getElementById("currentTextArea");
     currentValue = element.innerText;
@@ -672,11 +952,13 @@ function xsq() {
     if (internalmode == '1') {
         
         tillNowElement.innerText = tillNowElement.innerText + '' + currentValue + '^3';
+        previousValue = currentValue;
         currentValue = Math.pow(parseFloat(currentValue),3);
         element.innerText = currentValue;
     }
     else {
         tillNowElement.innerText = tillNowElement.innerText + '' + currentValue + '^2';
+        previousValue = currentValue;
         currentValue = Math.pow(parseFloat(currentValue), 2);;
         element.innerText = currentValue;
     }
@@ -691,6 +973,8 @@ function pi() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = Math.PI;
     element.innerText = currentValue;
 }
@@ -704,11 +988,15 @@ function rt() {
     if (internalmode == '1') {
 
         tillNowElement.innerText = tillNowElement.innerText + 'cbrt(' + currentValue + ')';
+        previousValue = currentValue;
+        ValueIsChanged = true;
         currentValue = Math.pow(parseFloat(currentValue), 1/3);
         element.innerText = currentValue;
     }
     else {
         tillNowElement.innerText = tillNowElement.innerText + 'sqrt(' + currentValue + ')';
+        previousValue = currentValue;
+        ValueIsChanged = true;
         currentValue = Math.pow(parseFloat(currentValue), 1/2);;
         element.innerText = currentValue;
     }
@@ -722,6 +1010,8 @@ function e() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = Math.E;
     element.innerText = currentValue;
 }
@@ -735,7 +1025,30 @@ function ce() {
     if (IsModeC && currentname.innerText == "C") {
         tillNowElement.innerText = "";
         currentname.innerText = 'CE';
+        result = [];
+        anyBracket = false;
+        backendIndex = 0;
+        state = 0;
+        resultIndex = 0;
+        decimalIsSet = false;
+        noOfOpenBrackets = 0;
+        finalResult;
+        IsSolvable = false;
+        newresult = false; var internalmode = 0;
+        functionval = false;
+        var text = "0";
+        element.innerText = text;
+        element = document.getElementById("currentTextArea");
+        currentValue = element.innerText;
+        tillNowElement = document.getElementById("tillnowtextArea");
+        inputWaitMethods = [];
+        inputWaitMethodType = [];
+        inputWaitMethodSolveable = [];
+        inputWaitMethodFirstVal = [];
+        IsinputWaitMethodStarting = [];
         IsModeC = false;
+        ValueIsChanged = false;
+        previousValue;
     } else {
         currentname.innerText = 'C';
     }
@@ -749,6 +1062,8 @@ function abs() {
         newresult = true;
     }
     tillNowElement.innerText = tillNowElement.innerText + `abs(${currentValue})`;
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = Math.abs(parseFloat(currentValue));
     element.innerText = currentValue;
     functionval = true;
@@ -761,7 +1076,9 @@ function negate() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText +`negate(${currentValue})`;
+    tillNowElement.innerText = tillNowElement.innerText + `negate(${currentValue})`;
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = -1* parseFloat(currentValue);
     element.innerText = currentValue;
     functionval = true;
@@ -771,6 +1088,7 @@ function backspace() {
     element = document.getElementById("currentTextArea");
     currentValue = element.innerText;
     var text = currentValue.substring(0, currentValue.length - 1);
+    previousValue = element.innerText;
     element.innerText = text;
 }
 
@@ -781,6 +1099,8 @@ function inverse() {
         newresult = true;
     }
     tillNowElement.innerText = tillNowElement.innerText + `1/(${currentValue})`;
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = 1 / parseFloat(currentValue);
     element.innerText = currentValue;
     functionval = true;
@@ -796,11 +1116,15 @@ function tenpow() {
     if (internalmode == '1') {
 
         tillNowElement.innerText = tillNowElement.innerText + '2^' + currentValue;
+        previousValue = currentValue;
+        ValueIsChanged = true;
         currentValue = Math.pow(2,parseFloat(currentValue));
         element.innerText = currentValue;
     }
     else {
-        tillNowElement.innerText = tillNowElement.innerText + '10^' + currentValue ;
+        tillNowElement.innerText = tillNowElement.innerText + '10^' + currentValue;
+        previousValue = currentValue;
+        ValueIsChanged = true;
         currentValue = Math.pow(10,parseFloat(currentValue));;
         element.innerText = currentValue;
     }
@@ -831,7 +1155,19 @@ function log() {
         if (tillNowElement.innerText == '') {
             newresult = true;
         }
-        tillNowElement.innerText = tillNowElement.innerText + 'log(' + currentValue + ')';
+        var str = viewString();
+        var fullString = tillNowElement.innerText;
+        var stringArray = fullString.split('');
+        stringArray.splice(stringArray.length - str.length, str.length);
+        
+        tillNowElement.innerText = stringArray.join('') + `log(${str})`;
+        if (result[result.length - 1] == currentValue) {
+            console.log("from log " + result[result.length - 1] + " " + currentValue);
+            result.pop();
+        }
+        
+        previousValue = currentValue;
+        ValueIsChanged = true;
         currentValue = Math.log10(parseFloat(currentValue));
         element.innerText = currentValue;
     }
@@ -848,11 +1184,15 @@ function ln() {
     if (internalmode == '1') {
 
         tillNowElement.innerText = tillNowElement.innerText + 'e^' + currentValue;
+        previousValue = currentValue;
+        ValueIsChanged = true;
         currentValue = Math.pow(Math.E, parseFloat(currentValue));
         element.innerText = currentValue;
     }
     else {
         tillNowElement.innerText = tillNowElement.innerText + 'ln(' + currentValue + ')';
+        previousValue = currentValue;
+        ValueIsChanged = true;
         currentValue = Math.log(parseFloat(currentValue));
         element.innerText = currentValue;
     }
@@ -867,6 +1207,8 @@ function exp() {
         newresult = true;
     }
     tillNowElement.innerText = tillNowElement.innerText + `exp(${currentValue})`;
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = Math.exp(parseFloat(currentValue));
     element.innerText = currentValue;
     functionval = true;
@@ -881,12 +1223,25 @@ function sin() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `sin(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length); 
+    tillNowElement.innerText = stringArray.join('') + `sin(${str})`; 
+    if (result[result.length - 1] == currentValue) {
+        console.log("from sin " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200; 
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
+    
     currentValue = Math.sin(currentValue);
     element.innerText = currentValue;
     functionval = true;
@@ -904,12 +1259,24 @@ function cos() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `cos(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `cos(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from cos " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = Math.cos(currentValue);
     element.innerText = currentValue;
     functionval = true;
@@ -926,12 +1293,24 @@ function tan() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `tan(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `tan(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from tan " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = Math.tan(currentValue);
     element.innerText = currentValue;
     functionval = true;
@@ -948,12 +1327,24 @@ function sec() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `sec(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `sec(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from sec " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = 1 / Math.cos(currentValue); 
     element.innerText = currentValue;
     functionval = true;
@@ -970,12 +1361,24 @@ function cosec() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `cosec(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `cosec(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from sin " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = 1 / Math.sin(currentValue); 
     element.innerText = currentValue;
     functionval = true;
@@ -992,12 +1395,24 @@ function cot() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `cot(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `cot(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from cot " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = 1 / Math.tan(currentValue); 
     element.innerText = currentValue;
     functionval = true;
@@ -1014,12 +1429,24 @@ function asin() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `asin(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `asin(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from sinInv " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = Math.asin(currentValue);
     element.innerText = currentValue;
     functionval = true;
@@ -1036,12 +1463,24 @@ function acos() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `acos(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `acos(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from acos " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = Math.acos(currentValue);
     element.innerText = currentValue;
     functionval = true;
@@ -1058,12 +1497,24 @@ function atan() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `atan(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `atan(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from tanInv " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = Math.atan(currentValue);
     element.innerText = currentValue;
     functionval = true;
@@ -1080,12 +1531,24 @@ function acosec() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `acosec(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `acosec(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from cosecInv " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = 1 / Math.asin(currentValue); 
     element.innerText = currentValue;
     functionval = true;
@@ -1102,12 +1565,24 @@ function asec() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `asec(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `asec(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from secInv " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = 1 / Math.acos(currentValue); 
     element.innerText = currentValue;
     functionval = true;
@@ -1124,12 +1599,24 @@ function acot() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `acot(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `acot(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from cotInv " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
     if (unit == '0') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 180;
     } else if (unit == '1') {
+        previousValue = currentValue;
         currentValue = currentValue * Math.PI / 200;
     }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = 1 / Math.atan(currentValue); 
     element.innerText = currentValue;
     functionval = true;
@@ -1190,7 +1677,17 @@ function floor() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `floor(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `floor(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from floor " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = Math.floor(parseFloat(currentValue));
     element.innerText = currentValue;
     functionval = true;
@@ -1205,7 +1702,17 @@ function ciel() {
     if (tillNowElement.innerText == '') {
         newresult = true;
     }
-    tillNowElement.innerText = tillNowElement.innerText + `ciel(${currentValue})`;
+    var str = viewString();
+    var fullString = tillNowElement.innerText;
+    var stringArray = fullString.split('');
+    stringArray.splice(stringArray.length - str.length, str.length);
+    tillNowElement.innerText = stringArray.join('') + `ciel(${str})`;
+    if (result[result.length - 1] == currentValue) {
+        console.log("from ciel " + result[result.length - 1] + " " + currentValue);
+        result.pop();
+    }
+    previousValue = currentValue;
+    ValueIsChanged = true;
     currentValue = Math.ceil(currentValue);
     element.innerText = currentValue;
     functionval = true;
@@ -1283,6 +1790,80 @@ function randpow() {
     }
 }
 
+function numberKeys() {
+    var numKeys = document.querySelectorAll('.num');
+    numKeys.forEach(button => {
+        button.addEventListener('click', () => {
+            ValueIsChanged = true;
+            element = document.getElementById("currentTextArea");
+            currentValue = element.innerText;
+            const key = button.id;
+            if (state == '0') {
+                element.innerText = `${key}`;
+                state = element.innerText;
+            }
+            else {
+                element.innerText = currentValue + `${key}`;
+                state = element.innerText;
+            }
+        });
+    });
+}
+
+function viewString() {
+    var currentView = tillNowElement.innerText;
+    var BracketFound = false;
+    var desiredString = "";
+    var noOfSubBrackets = -1;
+    if (anyBracket && noOfOpenBrackets == 0) {
+        for (var i = currentView.length - 1; i >= 0; i--) {
+            console.log(currentView[i]);
+            if (BracketFound) {
+                if (currentView[i] == '+' || currentView[i] == '-' || currentView[i] == 'x' || currentView[i] == '/') {
+                    break;
+                }
+                else {
+                    desiredString = desiredString + currentView[i];
+                }
+            }
+            else {
+                desiredString = desiredString + currentView[i];
+                if (currentView[i] == '(') {
+                    noOfSubBrackets = noOfSubBrackets - 1;
+                    if (noOfSubBrackets === 0) {
+                        BracketFound = true;
+                    }
+                }
+                else if (currentView[i] == ')') {
+                    if (noOfSubBrackets === -1) {
+                        noOfSubBrackets = 0 + 1;
+                    }
+                    else {
+                        noOfSubBrackets = noOfSubBrackets + 1;
+                    }
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+    }
+    else {
+        for (var i = currentView.length - 1; i >= 0; i--) {
+            if (currentView[i] == '+' || currentView[i] == '-' || currentView[i] == 'x' || currentView[i] == '/') {
+                break;
+            }
+            else {
+                desiredString = desiredString + currentView[i];
+            }
+        }
+    }
+    var newDesiredString = "";
+    for (var i = desiredString.length - 1; i >= 0; i--) {
+        newDesiredString = newDesiredString + desiredString[i];
+    }
+    return newDesiredString;
+}
 
 
 document.getElementById("memory").addEventListener("click", showMemory);
